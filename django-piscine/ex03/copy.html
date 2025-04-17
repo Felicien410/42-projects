@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills Progress</title>
+    <link rel="stylesheet" href="style.css"> <!-- Ton CSS externe -->
+</head>
+<body>
+
+    <h1 style="font-size: 24px; text-align: center;">Skills</h1>
+
+    <!-- Ajout d'un style inline pour ajuster la taille du tableau et la taille du texte -->
+    <table style="width: 100%; font-size: 16px;">
+        <tr>
+            <!-- Colonne Frontend avec largeur et marges spécifiées -->
+            <td style="width: 50%; padding-right: 20px; vertical-align: top;">
+                <h2 style="font-size: 20px;">Frontend</h2>
+                <p>HTML5 <span>80%</span></p>
+                <progress class="html5" value="80" max="100" style="width: 100%;"></progress>
+
+                <p>CSS3 <span>60%</span></p>
+                <progress class="css3" value="60" max="100" style="width: 100%;"></progress>
+
+                <p>jQuery <span>50%</span></p>
+                <progress class="jquery" value="50" max="100" style="width: 100%;"></progress>
+            </td>
+
+            <!-- Colonne Backend avec largeur et marges spécifiées -->
+            <td style="width: 50%; padding-left: 20px; vertical-align: top;">
+                <h2 style="font-size: 20px;">Backend</h2>
+                <p>Python <span>75%</span></p>
+                <progress class="python" value="75" max="100" style="width: 100%;"></progress>
+
+                <p>PHP <span>65%</span></p>
+                <progress class="php" value="65" max="100" style="width: 100%;"></progress>
+
+                <p>Node.js <span>35%</span></p>
+                <progress class="node-js" value="35" max="100" style="width: 100%;"></progress>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

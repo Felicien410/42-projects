@@ -1,0 +1,72 @@
+version: '3'
+
+services:
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress/
+    restart: on-failure
+    ports:
+      - "8000:80" 
+    volumes:
+      - wordpress_data:/var/www/html
+      - db_data:/var/lib/mysql
+    networks:
+      - my_network
+    depends_on:
+      - mariadb
+    env_file:
+      - .env
+    environment:
+      - DB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+    
+  nginx:
+    build:
+      context: ./requirements/nginx
+      dockerfile: Dockerfile
+    container_name: nginx
+    volumes:
+      - wordpress_data:/var/www/html
+    ports:
+      - "443:443"
+    depends_on:
+      - wordpress
+    restart: on-failure
+    networks:
+      - my_network
+    
+  mariadb:
+    build:
+      context: ./requirements/mariadb
+      dockerfile: Dockerfile
+    container_name: mariadb
+    volumes:
+      - db_data:/var/lib/mysql
+    env_file:
+      - .env
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER:     ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3306:3306"
+    networks:
+      - my_network
+    restart: on-failure
+
+volumes:
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/fcatteau/data/wordpress
+  db_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/fcatteau/data/mariadb
+
+networks:
+  my_network:
+    driver: bridge
